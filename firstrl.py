@@ -41,14 +41,19 @@ libtcod.console_set_custom_font('arial10x10.png', libtcod.FONT_TYPE_GREYSCALE | 
 libtcod.console_init_root(SCREEN_WIDTH, SCREEN_HEIGHT, 'python/libtcod tutorial', False)
 libtcod.sys_set_fps(LIMIT_FPS)
 
+# Player position
 playerx = SCREEN_WIDTH/2
 playery = SCREEN_HEIGHT/2
 
+# Initialize new off-screen console (for special effects, gui stuff, etc.)
+
 while not libtcod.console_is_window_closed():
+    con = libtcod.console_new(SCREEN_WIDTH, SCREEN_HEIGHT)
 
-    libtcod.console_set_default_foreground(0, libtcod.white)
-    libtcod.console_put_char(0, playerx, playery, '@', libtcod.BKGND_NONE)
+    libtcod.console_set_default_foreground(con, libtcod.white)
+    libtcod.console_put_char(con, playerx, playery, '@', libtcod.BKGND_NONE)
 
+    libtcod.console_blit(con, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0, 0)
     libtcod.console_flush()
 
     libtcod.console_put_char(0, playerx, playery, ' ', libtcod.BKGND_NONE)
