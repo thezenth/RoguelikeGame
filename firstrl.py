@@ -45,10 +45,12 @@ class Object:
         self.color = color
 
     def move(self, dx, dy):
-        # check if the tile we're stepping onto is blocked or not
-        if not map[self.x + dx][self.y + dy].blocked:
-            self.x += dx
-            self.y += dy
+        # first check whether or not we're out of range of the map
+        if ( self.x + dx < len(map) and self.y + dy < len(map[0]) ) and ( self.x + dx >= 0 and self.y + dy >= 0 ):
+            # check if the tile we're stepping onto is blocked or not
+            if not map[self.x + dx][self.y + dy].blocked:
+                self.x += dx
+                self.y += dy
 
     def draw(self):
         libtcod.console_set_default_foreground(con, self.color)
